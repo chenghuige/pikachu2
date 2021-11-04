@@ -1,0 +1,96 @@
+syntax = "proto2";
+package train_sample;
+
+option java_package = "com.sogou.feed.flink.online_training.data_proto";
+
+message UserInfo 
+{
+    required bytes  mid                 = 1;
+    required bytes  xid                 = 2;
+    required bytes  os                  = 3;
+    required bytes  product             = 4;
+    required bytes  app_ver             = 5;
+    required uint32 abtest_id           = 6;
+    required bytes  city                = 7;
+    required uint32 channel_id          = 8;
+    required bytes  screen_id           = 9;
+    required int32  if_ceil             = 10;
+}
+
+message ArticleClickInfo
+{
+    optional int32          position        = 1;
+    optional bool           b_real_show     = 2;
+    optional bool           b_click         = 3;
+    optional bool           b_click_back    = 4;
+    optional int32          duration        = 5;
+    optional float          read_completion_rate = 6;
+    optional bool           is_finish       = 7;
+}
+
+message ClickStatisInfo
+{
+    optional int32          article_show_update_time    = 1;
+    optional int32          real_show_update_time       = 2;
+    optional int32          act_click_update_time       = 3;
+}
+
+message ShowForTrainArticleInfo 
+{
+    required bytes              doc_id          = 1;
+    required bytes              train_art_info  = 2;
+    optional ArticleClickInfo   click_info      = 3;
+    optional bytes              appendix        = 4;
+}
+
+message ShowForTrain 
+{
+    required uint32                     create_time             = 1;
+    optional uint32                     last_update_time        = 2;
+    required UserInfo                   user_info               = 10;
+
+    required int32                      train_user_info_type    = 20;
+    optional bytes                      train_user_info         = 21;
+
+    required int32                      train_art_info_type     = 30;
+    repeated ShowForTrainArticleInfo    art_info_list           = 31;
+    optional ClickStatisInfo            click_statis_info       = 32;
+}
+
+message FeatureInfo 
+{
+    required bytes  name    = 1;
+    required float  val     = 2;
+}
+
+message FeatureField 
+{
+    required bytes          field       = 1;
+    repeated FeatureInfo    features    = 2;
+}
+
+message FeatureArticle
+{
+    required bytes              doc_id          = 1;
+    repeated FeatureField       fields          = 2;
+    optional ArticleClickInfo   click_info      = 3;
+}
+
+message ModelFeature 
+{
+    required bytes              model_name      = 1;
+    repeated FeatureField       user_fields     = 2;
+    repeated FeatureArticle     art_list        = 3;
+}
+
+message FeatureOutput
+{
+    required uint32             create_time             = 1;
+    required uint32             last_update_time        = 2;
+
+    required UserInfo           user_info               = 10;
+    optional ClickStatisInfo    click_statis_info       = 11;
+
+    repeated ModelFeature       model_features          = 20;
+}
+

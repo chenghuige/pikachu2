@@ -1,0 +1,1 @@
+../tuwen/update_model_info.py

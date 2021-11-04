@@ -1,4 +1,4 @@
-# pikachu2
+# pikachu
 一些比赛解决方案, 完整代码，但有些待整理。  
 ## 2021微信大数据挑战赛 第一名  
 [wechat](https://github.com/chenghuige/pikachu2/tree/master/projects/ai/wechat) <br> 

@@ -1,0 +1,1 @@
+../tuwen/run-full.sh

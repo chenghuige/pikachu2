@@ -1,0 +1,27 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/tensorflow:20.01-tf2-py3
+%files
+      	nccl_2.5.6-2+cuda10.2_x86_64.txz
+%post
+     	rm -rf /usr/local/mpi && \
+        apt-get update && apt install wget make tar && \
+        cd /usr/local && tar xvf nccl_2.5.6-2+cuda10.2_x86_64.txz && cd /root && \
+        wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz && \
+        gunzip -c openmpi-4.0.2.tar.gz | tar xf - && \
+        cd openmpi-4.0.2 && \
+        ./configure --prefix=/usr/local && \
+        make all install && \
+        ldconfig && \
+        apt install -y g++-4.8 && \
+        pip install tensorflow matplotlib cityscapesscripts && \
+        HOROVOD_NCCL_HOME=/usr/local/nccl_2.5.6-2+cuda10.2_x86_64.txz HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL pip install --no-cache-dir horovod && \
+        ln /usr/local/cuda-10.2/lib64/libcudart.so.10.2.89 /usr/local/cuda-10.2/lib64/libcudart.so.10.1 && \
+        ln /usr/local/cuda-10.2/lib64/libcupti.so.10.2.75 /usr/local/cuda-10.2/lib64/libcupti.so.10.1 && \
+        ln /usr/lib/x86_64-linux-gnu/libnvinfer.so.7.0.0 /usr/lib/x86_64-linux-gnu/libnvinfer.so.6 && \
+        ln /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so.7.0.0 /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so.6 && \
+        apt-get install -y --no-install-recommends openssh-client openssh-server && \
+        cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
+        echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
+        mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
+%environment
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.2/lib64:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/nccl_2.5.6-2+cuda10.2_x86_64/lib

@@ -1,0 +1,16 @@
+folder=$(dirname "$0")
+v=${folder##*/}
+x=$(basename "$0")
+echo $x
+x=${x%.*}
+
+sh ./run/$v/base.sh \
+  --model=Model \
+  --ddf \
+  --feats=user,doc,day,device,author,feed,song,singer,num_actions,num_read_comments,num_comments,num_likes,num_click_avatars,num_forwards,num_follows,num_favorites \
+  --feats2=manual_keys,machine_keys,manual_tags,machine_tags,desc \
+  --his_actions=read_comments,comments,likes,click_avatars,forwards,follows,favorites,negs,finishs,unfinishs \
+  --his_id_feats=feed \
+  --mname=$x \
+  $*
+

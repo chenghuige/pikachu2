@@ -1,0 +1,10 @@
+{
+  "exp_name": "GhostNet",
+  "num_epochs": 50,
+  "batch_size": 16,
+  "num_class": 10,
+  "size": 224,
+  "use_mnist_data": 1,
+  "train_list": "data/train.txt",
+  "test_list": "data/test.txt"
+}

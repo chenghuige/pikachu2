@@ -1,0 +1,1 @@
+../tuwen/gen-dict.py

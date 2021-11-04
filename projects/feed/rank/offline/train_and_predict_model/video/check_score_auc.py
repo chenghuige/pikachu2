@@ -1,0 +1,1 @@
+../tuwen/check_score_auc.py

@@ -1,0 +1,1 @@
+../tuwen/abinfos2.sh

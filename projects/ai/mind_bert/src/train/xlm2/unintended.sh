@@ -1,0 +1,12 @@
+folder=$(dirname "$0")
+v=${folder##*/}
+x=$(basename "$0")
+echo $x
+x=${x%.*}
+RECORD_DIR=../input/tfrecords/xlm2
+sh ./train/$v/common.sh \
+    --train_input=${RECORD_DIR}/jigsaw-unintended-bias-train \
+    --gpus=8 \
+    --vie=0.1 \
+    --model_dir=../working/exps/$v/$x \
+    $*

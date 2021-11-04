@@ -1,0 +1,12 @@
+folder=$(dirname "$0")
+v=${folder##*/}
+x=$(basename "$0")
+echo $x
+x=${x%.*}
+
+sh ./train/${v}/common.sh \
+  --span=2 \
+  --model=Model7_10 \
+  --pooling=dot \
+  --mname=$x \
+  $*

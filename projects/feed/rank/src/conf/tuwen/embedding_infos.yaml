@@ -1,0 +1,8 @@
+AGE:
+  type: SimpleEmbedding
+EDU:
+  type: SimpleEmbedding
+SEX:
+  type: SimpleEmbedding
+VDTM:
+  type: SimpleEmbedding

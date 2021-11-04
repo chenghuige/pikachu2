@@ -1,0 +1,1 @@
+../tuwen/deploy_model.sh

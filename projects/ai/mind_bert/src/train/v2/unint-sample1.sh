@@ -1,0 +1,14 @@
+folder=$(dirname "$0")
+v=${folder##*/}
+x=$(basename "$0")
+echo $x
+x=${x%.*}
+
+bin=./train.py
+# --train_input=../input/tfrecords/xlm/jigsaw-unintended-bias-train \
+#    --train_input=../input/tfrecords/xlm/jigsaw-toxic-comment-train \
+sh ./train/$v/toxic.sh \
+    --pretrained=../input/tf-xlm-roberta-base \
+    --train_input=../input/tfrecords/xlm-sample1/jigsaw-unintended-bias-train \
+    --mname=$x \
+    $*

@@ -1,0 +1,16 @@
+his_len:
+  read_comments: 50  
+  likes: 50
+  click_avatars: 30
+  forwards: 20
+  favorites: 10 
+  comments: 3 
+  follows: 5  
+  poss: 50
+  negs: 50
+  finishs: 50
+  unfinishs: 50
+  stays: 50
+  unstays: 20
+  todays: 50
+
