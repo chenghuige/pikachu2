@@ -1,8 +1,8 @@
 # https://algo.browser.qq.com/ 第三名解决方案    
 [文档](https://note.youdao.com/s/WlmA0aUJ) <br>   
 赛后借鉴gdy的label归一化和mlm方案，以及[第一名解决方案](https://github.com/zr2021/2021_QQ_AIAC_Tack1_1st) 做了进一步迭代。  
-其中label归一化相对比赛中采用的归一化效果更好，能继续提升2-3k。    
-融合vision和title的mlm相对效果更好，继续提升1-2k，默认的预训练已经改为--use_vision  
+其中label归一化相对比赛中采用的归一化效果更好，能继续提升2-3k。这个提升稳定的，相对如果不采用任何label处理提升约6k。   
+融合vision和title的mlm相对效果更好，继续提升1-2k，默认的预训练已经改为--use_vision 。  
 尝试采用第一名解决方案的多任务方式，目前支持tag+mlm，暂未实现mask frame,不过并没有获得提升。     
 相对文档时候的单模型离线0.8298，目前单模型离线0.834。 
 由于采用了较为严格的验证方案（严格保证训练和验证没有重复的vid,如果不去除重复vid会造成离线分数过高)，因此预期线上结果比较一致，待后续官方数据集开放可做进一步验证。    
@@ -34,7 +34,7 @@ cd ../qqbrowser
 //pointwise只采用tag  约0.832 - 0.834  
 ./offline.sh run/40/model2.sh  
 
-//large版本 并没有验证提升
+//large版本 并没有验证提升  
 cd ../pretrain   
 sh run/0/chinese-roberta-wwm-ext-large.sh     
 cd ../qqbrowser  
