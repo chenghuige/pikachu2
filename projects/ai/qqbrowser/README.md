@@ -27,7 +27,8 @@ NextVlad groups 4 -> 8 | 0.7287 | 0.8264 | -3.4k
 去掉label和样本权重策略| 0.7295 | 0.8276 | -2.2k
 
 个人觉得最满意的修改是 tag预测部分，做了较多实验，下面的方案相对baseline提升应该不止47K。  
-上面的消融只是说softmax和sigmoid区别， 而我还做了从部分tag到全tag使用的修改在初期验证也是有提升的具体数值没有记录。   
+上面的消融只是说softmax和sigmoid区别， 而我还做了从部分tag到全tag使用的修改在初期验证也是有提升的具体数值没有记录。 
+这个部分和模型结构无关，所以也很方便移植使用。  
 具体方案，所有tag都参与训练，每个tag id 对应一个向量。  
 对应video的最终向量。目标是使得video向量和当前video标注的各个tag id向量尽可能接近而和其他tag向量尽可能远离。    
 具体做法比如一个video A， 有三个tag标注 [pos1,pos2,pos3] 因为每个video的tag数目不固定，我们padding 0到定长 M， 通过Log Neg sampling 我们sample得到个N负例tag id。    
