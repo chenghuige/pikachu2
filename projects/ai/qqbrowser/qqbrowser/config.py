@@ -302,7 +302,10 @@ def init():
     FLAGS.mn += f'.{FLAGS.hug}'
 
   if FLAGS.words_bert:
-    FLAGS.transformer = f'bert-{FLAGS.words_bert}-chinese'
+    if FLAGS.words_bert == 'base':
+      FLAGS.transformer = 'bert-base-chinese'
+    else:
+      FLAGS.transformer = 'hfl/chinese-roberta-wwm-ext-large'
 
   if 'large' in FLAGS.transformer:
     FLAGS.batch_size = int(FLAGS.batch_size / 2)
@@ -355,7 +358,9 @@ def init():
     FLAGS.parse_strategy = 3
     FLAGS.reset_all = True
     FLAGS.ev_first = True
-    FLAGS.lr_mul = FLAGS.ft_lr_mul
+    if FLAGS.ft_lr_mul != 1:
+      FLAGS.lr *= FLAGS.ft_lr_mul 
+      FLAGS.bert_lr *= FLAGS.ft_lr_mul
     if FLAGS.ft_min_lr is not None:
       FLAGS.min_learning_rate = FLAGS.ft_in_lr
     FLAGS.loss_scale = FLAGS.ft_loss_scale
