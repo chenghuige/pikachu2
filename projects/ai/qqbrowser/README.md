@@ -11,7 +11,7 @@ Offline过程的pointwise没有使用pairwise数据，Online过程的pointwise�
 
 最快单模型流程：  
 ## 数据预处理  
-cd pikachu/projects/ai/qqbrowser/tools  
+cd projects/ai/qqbrowser/tools  
 python dump-ids.py  
 python dump-infos.py  
 cd ../prepare  
