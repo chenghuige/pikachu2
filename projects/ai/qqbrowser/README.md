@@ -33,7 +33,7 @@ NextVlad groups 4 -> 8 | 0.7287 | 0.8264 | -3.4k
 具体做法比如一个video A， 有三个tag标注 [pos1,pos2,pos3] 因为每个video的tag数目不固定，我们padding 0到定长 M， 通过Log Neg sampling 我们sample得到个N负例tag id。    
 因此我们得到[pos1,pos2,pos3,0,0，....0] 长度为M 正例tag  [neg1,neg2,neg3, ..... negN]长度为N 负例tag    
 假定video A的最终向量为emb   
-那么我们对应pos1,pos2,pos3计算三次softmax loss取平均（因为实际padding到了M可以利用mask mask掉padding的部分实际还是等做三次softmax loss）,以 pos0 为例   
+那么我们对应pos1,pos2,pos3计算三次softmax loss取平均（因为实际padding到了M可以利用mask mask掉padding 0的部分）,以 pos1 为例（其他类似）  
 label为 [1,0,0....] N个0     
 pred为 [dot(pos_tag0,emb), dot(neg_tag0,emb), dot(neg_tag1,emb)...]    
 
