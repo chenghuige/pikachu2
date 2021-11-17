@@ -7,14 +7,14 @@
 相对文档时候的单模型离线0.8298，目前单模型离线0.834。 
 由于采用了较为严格的验证方案（严格保证训练和验证没有重复的vid,如果不去除重复vid会造成离线分数过高)，因此预期线上结果比较一致，待后续官方数据集开放可做进一步验证。    
 值得注意的是，pointiwse和pairwise的spear结果有强相关性但不是完全对齐，这会给迭代带来困难，因为pointwise还相对比较耗时。   
-Offline过程的pointwise没有使用pairwise数据，Online过程的pointwise是否使用pairwise数据对在线的影响没有提交验证过。 如果不使用的话离线在线只有pairwise区别简洁一些。  
+Offline过程的pointwise没有使用pairwise数据，Online过程如果不使用的话离线在线只有pairwise区别简洁一些。但是分数会低赛后验证单模型8233 -> 8218。  
 
 本方案和baseline基本保持一致：  
-模型 | Pointwise | Pairwise(5Fold平均) | 差值  
+模型 | Pointwise | Pairwise(5Fold平均) | 差值 | 赛后提交验证
 ---|--- | --- | ---
 赛中离线最佳单模型(roberta.rv1.400) | 0.7284 |  0.8298 | 0 
 改为bin norm的label | _ |  0.832 | +2k
-mlm的预训练加入视频(模型结构相应也加入视频融合) | _ |  0.834 | +2k
+mlm的预训练加入视频(模型结构相应也加入视频融合) | _ |  0.834 | +2k | 0.8233
 去掉layernorm | 0.6605 | 0.656 | -173k
 pointwise多分类(softmax loss)->多标签(sigmoid loss) | 0.7175 | 0.7827 | -47k
 去掉NextVlad Merge部分 |0.7283 | 0.823 | -6.8k
